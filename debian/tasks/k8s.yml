@@ -1,0 +1,12 @@
+- name: "Install kubectl"
+  include_role:
+    name: githubixx.kubectl
+
+- name: "Install kubectl context plugin"
+  become: yes
+  unarchive:
+    src: https://github.com/postfinance/kubectl-ctx/releases/download/v{{ kubectl.ctx.version }}/kubectl-ctx_linux_x86_64.zip
+    dest: /usr/local/bin
+    remote_src: yes
+    include:
+      - kubectl-ctx

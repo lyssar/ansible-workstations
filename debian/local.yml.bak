@@ -1,0 +1,74 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'snapd', 'git', 'wget', 'unzip', 'libpcre3', 'libpcre3-dev' ]
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: Add PHP PPA
+      apt_repository:
+        repo: ppa:ondrej/php
+    
+    - name: Update apt and install php
+      apt: update_cache=yes name={{ item }} state=latest
+      loop:
+        - 'php'
+        - 'php-cli'
+        - 'php-common'
+        - 'php-zip'
+        - 'php-ctype'
+        - 'php-iconv'
+        - 'php-json'
+        - 'php-mbstring'
+        - 'php7.4'
+        - 'php7.4-cli'
+        - 'php7.4-common'
+        - 'php7.4-zip'
+        - 'php7.4-ctype'
+        - 'php7.4-iconv'
+        - 'php7.4-json'
+        - 'php7.4-mbstring'
+    
+    - name: Install SNAP Packages
+      snap:
+        name: 
+          - beekeeper-studio
+          - kreya
+          - postman
+
+    - name: Install SNAP Classic Packages
+      snap:
+        name:
+	  - code
+	  - intellij-idea-ultimate
+          - phpstorm
+        classic: yes
+
+    - name: Install composer
+      shell: curl -sS https://getcomposer.org/installer | php --install-dir=/usr/local/bin --filename=composer --2
+      args:
+        chdir: /usr/src/
+        creates: /usr/local/bin/composer
+        warn: false
+      become: yes
+
+    - name: Install symfony cli
+      shell: wget https://get.symfony.com/cli/installer -O - | bash 
+      args:
+        chdir: /usr/src
+        creates: /usr/local/bin/symfony
+	warn: false
+      become: yes

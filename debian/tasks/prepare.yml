@@ -1,0 +1,25 @@
+-
+  name: "Load vars"
+  include_vars: vars/main.yml
+- 
+  name: "Cleanup roles"
+  file:
+    path: roles
+    state: absent
+
+- local_action:
+    command ansible-galaxy install -r requirements.yml --roles-path roles
+-
+  apt: "name={{ item }} state=latest update_cache=yes force_apt_get=yes"
+  loop: 
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+    - git
+    - wget
+    - unzip
+    - python3-apt
+    - libpcre3
+    - libpcre3-dev
+  name: "Install required system packages"

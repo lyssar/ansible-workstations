@@ -1,0 +1,23 @@
+- name: "Remove nopref snapd to be able to install SNAPD"
+  file:
+    path: "/etc/apt/preferences.d/nosnap.pref"
+    state: absent
+
+-
+  apt: "name=snapd state=latest update_cache=yes force_apt_get=yes"
+  name: "Install snapd"
+- 
+  name: "Install SNAP packages"
+  snap: 
+    name: 
+      - beekeeper-studio
+      - kreya
+      - postman
+- 
+  name: "Install SNAP classic packages"
+  snap: 
+    classic: true
+    name: 
+      - code
+      - intellij-idea-ultimate
+      - phpstorm

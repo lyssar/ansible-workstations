@@ -1,0 +1,61 @@
+-
+  name: "Add PHP PPA"
+  apt_repository:
+    repo: ppa:ondrej/php
+  when: ansible_distribution == "Ubuntu"
+
+- 
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 14AA40EC0831756756D7F66C4F4EA0AAE5267A6C
+  name: "Add ondrej php GPG apt Key"
+  when: ansible_distribution == "Linux Mint"
+
+- name: Add repository for PHP versions (Ubuntu).
+  become: yes
+  apt_repository:
+    repo: "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main"
+    state: present
+    validate_certs: no
+    update_cache: no
+  when: ansible_distribution == "Linux Mint"
+
+- name: Update apt-get repo and cache
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- 
+  apt: "name={{ item }} state=latest update_cache=yes"
+  loop: 
+    - php8.0
+    - php8.0-cli
+    - php8.0-common
+    - php8.0-zip
+    - php8.0-ctype
+    - php8.0-iconv
+    - php8.0-mbstring
+    - php7.4
+    - php7.4-cli
+    - php7.4-common
+    - php7.4-zip
+    - php7.4-ctype
+    - php7.4-iconv
+    - php7.4-json
+    - php7.4-mbstring
+  name: "Update apt and install php"
+
+- 
+  args: 
+    chdir: /usr/src/
+    creates: /usr/local/bin/composer
+    warn: false
+  become: true
+  name: "Install composer"
+  shell: "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --2"
+- 
+  args: 
+    chdir: /usr/src
+    creates: /usr/local/bin/symfony
+    warn: false
+  become: true
+  name: "Install symfony cli"
+  shell: "wget https://get.symfony.com/cli/installer -O - | bash -s - --install-dir=/usr/local/bin"
