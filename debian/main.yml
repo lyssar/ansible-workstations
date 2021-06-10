@@ -2,9 +2,9 @@
 - 
   become: true
   hosts: localhost
-  tasks:
+  tasks: 
     - import_tasks: ./tasks/prepare.yml
-    #- import_tasks: ./tasks/snap.yml
-    #- import_tasks: ./tasks/docker.yml
-    #- import_tasks: ./tasks/php.yml
+    - import_tasks: ./tasks/snap.yml
+    - import_tasks: ./tasks/docker.yml
+    - import_tasks: ./tasks/php.yml
     - import_tasks: ./tasks/k8s.yml
