@@ -2,8 +2,6 @@
   name: "Load vars"
   include_vars: vars/main.yml
 
-- debug: var=ansible_user
-
 - 
   name: "Cleanup roles"
   file:
