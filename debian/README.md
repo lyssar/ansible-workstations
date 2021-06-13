@@ -17,6 +17,16 @@ sudo pip3 install --prefix /usr/local ansible-lint
 
 ## How to use
 
+### Linux
+
 ```
-sudo ansible-pull -U https://github.com/lyssar/ansible-workstations.git
+sudo ansible-pull -U https://github.com/lyssar/ansible-workstations.git debian/main.yml
 ```
+
+
+## ToDos
+
+- Test on Ubuntu
+- Test on a bare Debian
+- Implement Tasks for Windows workstations
+- Implement Tasks for Arch Linux workstations

@@ -1,0 +1,32 @@
+-
+  name: "Oh My ZSH"
+  include_role:
+    name: gantsign.oh-my-zsh
+
+## - Since the oh-my-zsh role will always generate the .zshrc newly we have to add this all time
+- name: "Add .private bash file loading to zshrc"
+  lineinfile:
+    path: "/home/{{ item.username }}/.zshrc"
+    line: "[ -f ~/.private ] && . ~/.private"
+  with_items: "{{ users }}"
+
+- name: "Download Ferdi in version {{ ferdi_version }}"
+  args:
+    warn: false
+  become: true
+  shell: 
+    cmd: "wget -O ferdi.deb 'https://github.com/getferdi/ferdi/releases/download/v{{ ferdi_version }}/ferdi_{{ ferdi_version }}_amd64.deb'"
+    chdir: "/tmp"
+
+- name: "Install Ferdi version {{ ferdi_version }}"
+  apt:
+    deb: "/tmp/ferdi.deb"
+
+- name: "Create workspaces folder"
+  become: no
+  file:
+    path: "{{ item.src }}"
+    mode: "{{ item.mode }}"
+    state: directory
+    recurse: yes
+  with_items: "{{ workspaces }}"

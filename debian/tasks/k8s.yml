@@ -10,3 +10,12 @@
     remote_src: yes
     include:
       - kubectl-ctx
+
+- name: "Download k3sup installer"
+  args:
+    warn: false
+  become: true
+  shell: 
+    cmd: "curl -sLS https://get.k3sup.dev | sh"
+    chdir: "/tmp"
+    creates: "/usr/local/bin/k3sup"

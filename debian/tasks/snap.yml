@@ -6,18 +6,13 @@
 -
   apt: "name=snapd state=latest update_cache=yes force_apt_get=yes"
   name: "Install snapd"
-- 
+
+-
   name: "Install SNAP packages"
   snap: 
-    name: 
-      - beekeeper-studio
-      - kreya
-      - postman
+    name: "{{ snap_packages }}"
 - 
   name: "Install SNAP classic packages"
-  snap: 
+  snap:
     classic: true
-    name: 
-      - code
-      - intellij-idea-ultimate
-      - phpstorm
+    name: "{{ snap_packages_classic }}"

@@ -1,16 +1,35 @@
 ---
+## -- K8S
 kubectl:
   ctx:
     version: 1.0.5
+
+## -- OH MY ZSH, Misc
+oh_my_zsh_theme: robbyrussell
+oh_my_zsh_plugins:
+  - git
+oh_my_zsh_install: yes
+# Like wtf. why "users"
+users:
+  - username: shens
+    oh_my_zsh:
+      theme: afowler
+      plugins:
+        - git
+
+## -- NODEJS, YARN
+nodejs: 14
+yarn: latest
+
+## -- PHP
 php_packages:
-  - php
-  - php-cli
-  - php-common
-  - php-zip
-  - php-ctype
-  - php-iconv
-  - php-json
-  - php-mbstring
+  - php8.0
+  - php8.0-cli
+  - php8.0-common
+  - php8.0-zip
+  - php8.0-ctype
+  - php8.0-iconv
+  - php8.0-mbstring
   - php7.4
   - php7.4-cli
   - php7.4-common
@@ -20,3 +39,35 @@ php_packages:
   - php7.4-json
   - php7.4-mbstring
 
+## -- SNAP
+snap_packages:
+  - beekeeper-studio
+  - kreya
+  - postman
+snap_packages_classic:
+  - kontena-lens
+  - code
+  - intellij-idea-ultimate
+  - phpstorm
+
+
+## -- Ferdi
+ferdi_version: 5.5.0
+
+## -- Workspaces, just for the user who runs the script
+workspaces:
+  - 
+    src: "~/workspaces/applications"
+    mode: "0775"
+  - 
+    src: "~/workspaces/web"
+    mode: "0775"
+  -
+    src: "~/workspaces/scripts"
+    mode: "0775"
+  - 
+    src: "~/workspaces/devops"
+    mode: "0775"
+  - 
+    src: "~/.ssh"
+    mode: "0700"
