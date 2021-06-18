@@ -39,6 +39,12 @@
   name: "Install composer"
   shell: "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --2"
 
+- name: "Install symonfy yaml global for phing"
+  composer:
+    command: require
+    global_command: yes
+    arguments: symfony/yaml
+
 - 
   args:
     chdir: /usr/src
@@ -47,3 +53,18 @@
   become: true
   name: "Install symfony cli"
   shell: "wget https://get.symfony.com/cli/installer -O - | bash -s - --install-dir=/usr/local/bin"
+
+- 
+  args:
+    chdir: /usr/local/bin/
+    creates: /usr/local/bin/phing
+    warn: false
+  become: true
+  name: "Install latest phing"
+  shell: "wget https://www.phing.info/get/phing-latest.phar -O phing"
+
+- name: "Fix phing permissions"
+  become: true
+  file:
+    path: /usr/local/bin/phing
+    mode: u=rwx,g=rx,o=rx

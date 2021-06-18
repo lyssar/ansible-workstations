@@ -5,9 +5,9 @@
   pre_tasks:
     - import_tasks: ./tasks/prepare.yml
   tasks:
-    # - import_tasks: ./tasks/snap.yml
-    # - import_tasks: ./tasks/docker.yml
-    # - import_tasks: ./tasks/php.yml
-    # - import_tasks: ./tasks/k8s.yml
-    # - import_tasks: ./tasks/nodejs.yml
+    - import_tasks: ./tasks/snap.yml
+    - import_tasks: ./tasks/docker.yml
+    - import_tasks: ./tasks/php.yml
+    - import_tasks: ./tasks/k8s.yml
+    - import_tasks: ./tasks/nodejs.yml
     - import_tasks: ./tasks/misc.yml

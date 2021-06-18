@@ -1,3 +1,6 @@
 ---
-- src: githubixx.kubectl
-- src: gantsign.oh-my-zsh
+roles:
+  - src: githubixx.kubectl
+  - src: gantsign.oh-my-zsh
+collections:
+  - community.general

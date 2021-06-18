@@ -30,6 +30,7 @@ php_packages:
   - php8.0-ctype
   - php8.0-iconv
   - php8.0-mbstring
+  - php8.0-xml
   - php7.4
   - php7.4-cli
   - php7.4-common
@@ -38,6 +39,7 @@ php_packages:
   - php7.4-iconv
   - php7.4-json
   - php7.4-mbstring
+  - php7.4-xml
 
 ## -- SNAP
 snap_packages:
