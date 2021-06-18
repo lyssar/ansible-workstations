@@ -40,6 +40,7 @@
   shell: "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --2"
 
 - name: "Install symonfy yaml global for phing"
+  become: false
   composer:
     command: require
     global_command: yes
