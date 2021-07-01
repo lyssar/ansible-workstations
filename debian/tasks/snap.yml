@@ -11,7 +11,7 @@
   name: "Install SNAP packages"
   snap: 
     name: "{{ item }}"
-  loop: "{{ item }}"
+  loop: "{{ snap_packages }}"
 
 -
   name: "Install SNAP packages"
