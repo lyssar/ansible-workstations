@@ -9,13 +9,10 @@
 
 -
   name: "Install SNAP packages"
-  snap: 
-    name: "{{ item }}"
+  shell: "snap install {{ item }}"
   loop: "{{ snap_packages }}"
 
 -
   name: "Install SNAP packages"
-  snap:
-    classic: yes
-    name: "{{ item }}"
+  shell: "snap install {{ item }} --classic"
   loop: "{{ snap_packages_classic }}"
