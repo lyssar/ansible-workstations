@@ -8,11 +8,14 @@
   name: "Install snapd"
 
 -
-  name: "Install SNAP packages"
+  name: "Install SNAP package {{ item }}"
   snap: 
-    name: "{{ snap_packages }}"
-- 
-  name: "Install SNAP classic packages"
+    name: "{{ item }}"
+  loop: snap_packages
+
+-
+  name: "Install SNAP package {{ item }}"
   snap:
     classic: true
-    name: "{{ snap_packages_classic }}"
+    name: "{{ item }}"
+  loop: snap_packages_classic
