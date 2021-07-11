@@ -19,3 +19,12 @@
     cmd: "curl -sLS https://get.k3sup.dev | sh"
     chdir: "/tmp"
     creates: "/usr/local/bin/k3sup"
+
+- name: "Install Helm"
+  args:
+    warn: false
+  become: true
+  shell: 
+    cmd: "curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash"
+    chdir: "/tmp"
+    creates: "/usr/local/bin/helm"
