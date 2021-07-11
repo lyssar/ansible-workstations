@@ -17,4 +17,29 @@
 
 -
   name: "Update apt and install docker-ce"
-  apt: "name=docker-ce state=latest update_cache=yes"
+  apt: "name={{ item }} state=latest update_cache=yes force_apt_get=yes"
+  loop: 
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+- name: "Add docker as group to user {{ username }}"
+  user:
+    name: "{{ username }}"
+    groups: docker
+    append: yes
+
+- 
+  args:
+    chdir: /usr/local/bin/
+    creates: /usr/local/bin/docker-compose
+    warn: false
+  become: true
+  name: "Install latest docker-compose"
+  shell: "sudo curl -L \"https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose"
+
+- name: "Fix phing permissions"
+  become: true
+  file:
+    path: /usr/local/bin/docker-compose
+    mode: u=rwx,g=rx,o=rx

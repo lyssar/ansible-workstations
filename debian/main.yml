@@ -2,6 +2,10 @@
 - 
   become: true
   hosts: localhost
+  vars_prompt:
+    - name: username
+      prompt: What is your username?
+      private: no
   pre_tasks:
     - import_tasks: ./tasks/prepare.yml
   tasks:
